@@ -5,24 +5,51 @@
  * File: source.cpp
 */
 
-/*
-struct fileHas
+//imported libraries
+#import <string>
+
+//Function Prototyping
+int main();
+int makeHash(string fileName);
+
+struct fileHash
 {
   string fileName
-  
+  int fileHash
+} ;
+
+
+int main()
+{
+  //fileHashArr <- []
+
+  //Get the List of Files
+  //  -Recursively, perhaps?
+  //    checkfolder(folder)
+
+  */
+
+  //Create a hash of every file
+
+  //Create structs for each file of {pathToFile, hash}
+
+  //Sort the list of structs by hash
+
+  //Identify segments of duplicates
+
+  //Print duplicate segments
 }
 
-*/
+int makeHash(string fileName)
+{
+  
+  return 0;
+}
 
-//Get the List of Files
-//
-
-//Create a hash of every file
-
-//Create structs for each file of {pathToFile, hash}
-
-//Sort the list of structs by hash
-
-//Identify segments of duplicates
-
-//Print duplicate segments
+void checkFolder(string folderName)
+{
+  //      for each subfolder in folder
+  //        checkfolder(subfolder)
+  //      for each file in folder
+  //        fileHashArr <- fileHash(file + directory, makeHash(file))
+}
