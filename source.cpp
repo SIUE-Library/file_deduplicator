@@ -27,8 +27,6 @@ int main()
   //  -Recursively, perhaps?
   //    checkfolder(folder)
 
-  */
-
   //Create a hash of every file
 
   //Create structs for each file of {pathToFile, hash}
