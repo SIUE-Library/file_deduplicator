@@ -6,11 +6,13 @@
 */
 
 //imported libraries
-#import <string>
+#include <string>
+#include <vector>
+#include <iostream>
 
 //Function Prototyping
-int main();
-int makeHash(string fileName);
+int main(int argc, char* argv[]);
+int makeHash(string fileName, vector<fileHash> fileHashArr);
 
 struct fileHash
 {
@@ -19,23 +21,38 @@ struct fileHash
 } ;
 
 
-int main()
+int main(int argc, char* argv[])
 {
+  if(argc != 2)
+  {
+    std::cerr << "Invalid Parameter. \n Correct syntax: ./deduplicate.out <root directory>";
+    exit(-1) 
+  }
+  
+  
   //fileHashArr <- []
-
+  std::vector <fileHash> fileHashArr;
   //Get the List of Files
   //  -Recursively, perhaps?
   //    checkfolder(folder)
-
+  checkFolder(
   //Create a hash of every file
-
   //Create structs for each file of {pathToFile, hash}
 
   //Sort the list of structs by hash
-
-  //Identify segments of duplicates
-
+  
   //Print duplicate segments
+  for(int i = 1; i < fileHashArr.size(); i++)
+  {
+    int j = i + 1;
+    while(j < fileHashArr.size() && fileHashArr[i].fileHash == fileHashArr[j].fileHash)
+    {
+      //Add fileHashArr[j] to the list
+      j++; 
+    }
+    //Add fileHash[i] to the list
+    i = j;
+  }
 }
 
 int makeHash(string fileName)
@@ -44,7 +61,7 @@ int makeHash(string fileName)
   return 0;
 }
 
-void checkFolder(string folderName)
+void checkFolder(string folderName, vector<fileHash> fileHashArr)
 {
   //      for each subfolder in folder
   //        checkfolder(subfolder)
