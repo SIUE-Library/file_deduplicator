@@ -21,7 +21,7 @@ void checkFolder(string folderName, vector<fileHash> *fileHashArr, hash<string> 
 
 struct fileHash
 {
-  `	string fileName
+  	string fileName
 	int hashCode
 } ;
 
