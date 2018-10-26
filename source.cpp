@@ -9,12 +9,15 @@
 #include <string>
 #include <vector>
 #include <iostream>
+#include <fstream>
+#include <sstream>
 #include <algorithm>
+#include <unordered_map>
 
 //Function Prototyping
 int main(int argc, char* argv[]);
-int makeHash(string fileName);
-void checkFolder(string folderName, vector<fileHash> *fileHashArr);
+int makeHash(string fileName hash<string> *hasher);
+void checkFolder(string folderName, vector<fileHash> *fileHashArr, hash<string> *hasher);
 
 struct fileHash
 {
@@ -35,9 +38,9 @@ int main(int argc, char* argv[])
   //fileHashArr <- []
   std::vector <fileHash> fileHashArr;
   //Get the List of Files
-  //  -Recursively, perhaps?
-  //    checkfolder(folder)
-  checkFolder(argv[1], &fileHashArr);
+  //  -Recursively
+  hash<string> hasher;
+  checkFolder(argv[1], &fileHashArr, &hasher);
   //Create a hash of every file
   //Create structs for each file of {pathToFile, hash}
 
@@ -57,16 +60,24 @@ int main(int argc, char* argv[])
       j++; 
     }
     //Add fileHash[i] to the list
-    i = j;
+    i = j + 1;
   }
 }
 
-int makeHash(string fileName)
+int makeHash(string fileName, hash<string>* hasher)
 {
-  return 0;
+	std::ifstream inFile;
+  	//fileIO <- file.open(fileName) 
+	inFile.open(fileName);
+	stringstream stringStream;
+	stringStream << inFile.rdbuf();
+	std::string fileContents;
+	fileContents = stringStream.str();
+	//fileContents <- fileIO.read()
+  	return *hasher(fileContents);
 }
 
-void checkFolder(string folderName, vector<fileHash>* fileHashArr)
+void checkFolder(string folderName, vector<fileHash>* fileHashArr, hash<string>* hasher)
 {
   //      for each subfolder in folder
   //        checkfolder(subfolder)
