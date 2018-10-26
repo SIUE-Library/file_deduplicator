@@ -1,6 +1,6 @@
 /* Project: File Deduplicator
  * Organization: The Lovejoy Library of Southern Illinois University Edwardsville
- * Department: Digital Initiatives and
+ * Department: Digital Initiatives
  * Programmer: Jacob Grubb
  * File: source.cpp
 */
@@ -39,7 +39,7 @@ int main(int argc, char* argv[])
   	std::vector <fileHash> fileHashArr;
   	//Get the List of Files
   	//  -Recursively
-  	hash<string> hasher;
+  	std::hash<string> hasher;
   	checkFolder(argv[1], &fileHashArr, &hasher);
   	//Create a hash of every file
   	//Create structs for each file of {pathToFile, hash}
@@ -69,12 +69,14 @@ int makeHash(string fileName, hash<string>* hasher)
 	std::ifstream inFile;
   	//fileIO <- file.open(fileName) 
 	inFile.open(fileName);
+	//Load file into string stream
 	stringstream stringStream;
 	stringStream << inFile.rdbuf();
+	//Read String stream into string object with tostring method on the string stream
 	std::string fileContents;
 	fileContents = stringStream.str();
-	//fileContents <- fileIO.read()
-  	return *hasher(fileContents);
+	//Return the hash of the string contents
+  	return *hasher(fileName + fileContents);
 }
 
 void checkFolder(string folderName, vector<fileHash>* fileHashArr, hash<string>* hasher)
@@ -82,5 +84,5 @@ void checkFolder(string folderName, vector<fileHash>* fileHashArr, hash<string>*
  	//for each subfolder in folder
  	//	checkfolder(subfolder)
   	//for each file in folder
-  	//	fileHashArr <- fileHash(file + directory, makeHash(file))
+  	//	fileHashArr <- fileHash(file + directory, makeHash(file, hasher))
 }
