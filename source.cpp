@@ -39,13 +39,13 @@ int main(int argc, char* argv[])
   	std::vector <fileHash> fileHashArr;
   	//Get the List of Files
   	//  -Recursively
-  	std::hash<string> hasher;
+  	std::hash<std::string> hasher;
   	checkFolder(argv[1], &fileHashArr, &hasher);
   	//Create a hash of every file
   	//Create structs for each file of {pathToFile, hash}
 
  	 //Sort the list of structs by hash
-  	std::sort(fileHashArr.begin(), fileHashArr.end(), [](const fileHash& h1, const fileHas &h2)
+  	std::sort(fileHashArr.begin(), fileHashArr.end(), [](const fileHash& h1, const fileHash &h2)
 	{
 		return h1.hashCode < h2.hashCode;
 	});
@@ -85,11 +85,11 @@ int makeHash(std::string fileName, std::hash<string>* hasher)
   	//fileIO <- file.open(fileName) 
 	inFile.open(fileName);
 	//Load file into string stream
-	stringstream stringStream;
-	stringStream << inFile.rdbuf();
+	std::stringstream sStream;
+	sStream << inFile.rdbuf();
 	//Read String stream into string object with tostring method on the string stream
 	std::string fileContents;
-	fileContents = stringStream.str();
+	fileContents = sStream.str();
 	//Return the hash of the string contents
   	return *hasher(fileName + fileContents);
 }
