@@ -31,7 +31,7 @@ int main(int argc, char* argv[])
 	if(argc != 2)
 	{
     		std::cerr << "Invalid Parameter. \n Correct syntax: ./deduplicate.out <root directory>";
-   		exit(-1) ;
+   		exit(-1);
   	}
   
   
@@ -49,7 +49,7 @@ int main(int argc, char* argv[])
 	{
 		return h1.hashCode < h2.hashCode;
 	});
-  
+  	std::vector<fileHash> duplicateArr;
   	//Print duplicate segments
   	for(int i = 1; i < fileHashArr.size(); i++)
   	{
@@ -57,11 +57,26 @@ int main(int argc, char* argv[])
     		while(j < fileHashArr.size() && fileHashArr[i].hashCode == fileHashArr[j].hashCode)
     		{
       			//Add fileHashArr[j] to the list
+			duplicateArr.push_back(fileHashArr[j]);
       			j++; 
     		}
     	//Add fileHash[i] to the list
+	duplicateArr.push_back(fileHashArr[i]);
     	i = j + 1;
   	}
+	//Print out the duplicates in a report
+	outFile.open("Report.txt");
+	if (!outFile)
+	{
+		std::cerr << "Error opening the output file.";
+		exit(2);
+	}
+	for(int i = 0; i < duplicateArr.size(); i++)
+	{
+		outFile << duplicateArr[i].fileName << '\n';	
+	}
+	outFile.close();
+	return 0;
 }
 
 int makeHash(string fileName, hash<string>* hasher)
