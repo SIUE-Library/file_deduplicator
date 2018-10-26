@@ -16,12 +16,12 @@
 
 //Function Prototyping
 int main(int argc, char* argv[]);
-int makeHash(string fileName hash<string> *hasher);
-void checkFolder(string folderName, vector<fileHash> *fileHashArr, hash<string> *hasher);
+int makeHash(std::string fileName, std::hash<std::string> *hasher);
+void checkFolder(std::string folderName, std::vector<fileHash> *fileHashArr, std::hash<std::string> *hasher);
 
 struct fileHash
 {
-  	string fileName
+  	std::string fileName
 	int hashCode
 } ;
 
@@ -79,7 +79,7 @@ int main(int argc, char* argv[])
 	return 0;
 }
 
-int makeHash(string fileName, hash<string>* hasher)
+int makeHash(std::string fileName, std::hash<string>* hasher)
 {
 	std::ifstream inFile;
   	//fileIO <- file.open(fileName) 
@@ -94,7 +94,7 @@ int makeHash(string fileName, hash<string>* hasher)
   	return *hasher(fileName + fileContents);
 }
 
-void checkFolder(string folderName, vector<fileHash>* fileHashArr, hash<string>* hasher)
+void checkFolder(std::string folderName, std::vector<fileHash>* fileHashArr, std::hash<string>* hasher)
 {
  	//for each subfolder in folder
  	//	checkfolder(subfolder)
