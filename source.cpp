@@ -51,7 +51,7 @@ int main(int argc, char* argv[])
 	});
   	std::vector<fileHash> duplicateArr;
   	//Print duplicate segments
-  	for(int i = 1; i < fileHashArr.size(); i++)
+  	for(int i = 0; i < fileHashArr.size(); i++)
   	{
     		int j = i + 1;
     		while(j < fileHashArr.size() && fileHashArr[i].hashCode == fileHashArr[j].hashCode)
