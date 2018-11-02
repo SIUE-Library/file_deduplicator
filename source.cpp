@@ -44,7 +44,7 @@ int main(int argc, char* argv[])
   	//Create a hash of every file
   	//Create structs for each file of {pathToFile, hash}
 
- 	 //Sort the list of structs by hash
+ 	//Sort the list of structs by hash
   	std::sort(fileHashArr.begin(), fileHashArr.end(), [](const fileHash& h1, const fileHash &h2)
 	{
 		return h1.hashCode < h2.hashCode;
@@ -53,16 +53,11 @@ int main(int argc, char* argv[])
   	//Print duplicate segments
   	for(int i = 0; i < fileHashArr.size(); i++)
   	{
-    		int j = i + 1;
-    		while(j < fileHashArr.size() && fileHashArr[i].hashCode == fileHashArr[j].hashCode)
-    		{
-      			//Add fileHashArr[j] to the list
-			duplicateArr.push_back(fileHashArr[j]);
-      			j++; 
-    		}
-    	//Add fileHash[i] to the list
-	duplicateArr.push_back(fileHashArr[i]);
-    	i = j + 1;
+		if(i + 1 < fileHashArr.size() && (fileHashArr[i] == fileHashArr[i+1] || fileHashArr[i] == fileHashArr[i-1]))
+		{
+			duplicateArr.push_back(fileHashArr[i]);
+			i = i + 1;
+		}
   	}
 	//Print out the duplicates in a report
 	outFile.open("Report.txt");
